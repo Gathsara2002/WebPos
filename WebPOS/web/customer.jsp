@@ -1,3 +1,5 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="dto.CustomerDTO" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,8 +110,31 @@
             </tr>
             </thead>
 
-            <tbody id="tblCustomer"></tbody>
+            <tbody id="tblCustomer">
 
+            <%
+                ArrayList<CustomerDTO> customers = (ArrayList<CustomerDTO>) request.getAttribute("keyOne");
+
+                if (customers != null) {
+                    for (CustomerDTO customer : customers) {
+            %>
+
+            <tr>
+                <td><%=customer.getId()%>
+                </td>
+                <td><%=customer.getName()%>
+                </td>
+                <td><%=customer.getAddress()%>
+                </td>
+                <td><%=customer.getTp()%>
+                </td>
+            </tr>
+
+            <%
+                    }
+                }
+            %>
+            </tbody>
         </table>
     </section>
 
