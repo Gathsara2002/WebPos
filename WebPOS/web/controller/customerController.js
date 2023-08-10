@@ -1,19 +1,21 @@
 /*get existing customers*/
-getAllCustomer();
+/*getAllCustomer();*/
 
 /*add customer to table*/
 /*bind event to save customer*/
+/*
 $("#btnSaveCustomer").click(function () {
     saveCustomer();
 });
+*/
 
 /*get all customers*/
-$("#btnGetAllCustomers").click(function () {
+/*$("#btnGetAllCustomers").click(function () {
     getAllCustomer();
-});
+});*/
 
 /*delete customer*/
-$("#btnDeleteCustomer").click(function () {
+/*$("#btnDeleteCustomer").click(function () {
     let id = $("#customerId").val();
 
     let consent = confirm("Do you want to delete.?");
@@ -28,20 +30,20 @@ $("#btnDeleteCustomer").click(function () {
         }
     }
 
-});
+});*/
 
 /*update customer*/
-$("#btnUpdateCustomer").click(function () {
+/*$("#btnUpdateCustomer").click(function () {
     let id = $("#customerId").val();
     updateCustomer(id);
     clearCustomerInputFields();
-});
+});*/
 
 
 /*crud operation functions*/
 
 /*save customer function*/
-function saveCustomer() {
+/*function saveCustomer() {
     let id = $("#customerId").val();
     //check customer is exists or not?
     if (searchCustomer(id.trim()) === undefined) {
@@ -68,10 +70,10 @@ function saveCustomer() {
         alert("Customer already exits.!");
         clearCustomerInputFields();
     }
-}
+}*/
 
 /*get all customer function*/
-function getAllCustomer() {
+/*function getAllCustomer() {
     //clear table data
     $("#tblCustomer").empty();
 
@@ -90,22 +92,22 @@ function getAllCustomer() {
 
         $("#tblCustomer").append(row);
 
-        /*invoke every time when new customer add to table*/
+        /!*invoke every time when new customer add to table*!/
         bindEventToCustomer();
     }
-}
+}*/
 
 /*search customer function*/
-function searchCustomer(id) {
+/*function searchCustomer(id) {
     return cusDB.find(function (customer) {
         //if the search id match with customer record
         //then return that object
         return customer.cusId === id;
     });
-}
+}*/
 
 /*delete customer function*/
-function deleteCustomer(id) {
+/*function deleteCustomer(id) {
     for (let i = 0; i < cusDB.length; i++) {
         if (cusDB[i].cusId === id) {
             cusDB.splice(i, 1);
@@ -113,10 +115,10 @@ function deleteCustomer(id) {
         }
     }
     return false;
-}
+}*/
 
 /*update customer function*/
-function updateCustomer(id) {
+/*function updateCustomer(id) {
     if (searchCustomer(id) === undefined) {
         alert("No such Customer..please check the ID");
     } else {
@@ -137,7 +139,7 @@ function updateCustomer(id) {
         }
     }
 
-}
+}*/
 
 /*bind events to table*/
 function bindEventToCustomer() {
