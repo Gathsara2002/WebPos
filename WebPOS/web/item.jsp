@@ -53,25 +53,25 @@
 
             <h2 class="fw-bold text-start mb-3">Item Form</h2>
 
-            <form>
+            <form id="itemForm">
                 <div class="mb-3">
                     <label for="itemCode1" class="form-label">Item Code</label>
-                    <input type="text" class="form-control" id="itemCode1">
+                    <input type="text" class="form-control" id="itemCode1" name="code">
                     <small class="control-error text-danger" id="lblItemCode"></small>
                 </div>
                 <div class="mb-3">
                     <label for="itemName1" class="form-label">Item Name</label>
-                    <input type="text" class="form-control" id="itemName1">
+                    <input type="text" class="form-control" id="itemName1" name="itemName">
                     <small class="control-error text-danger" id="lblItemName"></small>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Unit Price</label>
-                    <input type="text" class="form-control" id="price">
+                    <input type="text" class="form-control" id="price" name="price">
                     <small class="control-error text-danger" id="lblItemPrice"></small>
                 </div>
                 <div class="mb-3">
                     <label for="qty" class="form-label">Qty On Hand</label>
-                    <input type="number" class="form-control" id="qty" min="0">
+                    <input type="number" class="form-control" id="qty" min="0" name="qty">
                     <small class="control-error text-danger" id="lblItemQty"></small>
                 </div>
             </form>
@@ -80,17 +80,17 @@
 
         <!--Buttons-->
         <div class="col-4 mt-5">
-            <button id="btnSaveItem" type="button" class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save
-                Item
+            <button id="btnSaveItem" form="itemForm" formmethod="post" formaction="item?option=ADD"
+                    class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Item
             </button>
-            <button id="btnDeleteItem" type="button" class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete
-                Item
+            <button id="btnDeleteItem" form="itemForm" formmethod="post" formaction="item?option=DELETE"
+                    class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Item
             </button>
-            <button id="btnUpdateItem" type="button" class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update
-                Item
+            <button id="btnUpdateItem" form="itemForm" formmethod="post" formaction="item?option=UPDATE"
+                    class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Item
             </button>
-            <button id="btnGetAllItems" type="button" class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get
-                All
+            <button id="btnGetAllItems" form="itemForm" formmethod="get" formaction="item"
+                    class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get All
             </button>
         </div>
 
