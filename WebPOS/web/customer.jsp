@@ -80,16 +80,16 @@
 
         <!--Buttons-->
         <div class="col-4 mt-5">
-            <button id="btnSaveCustomer"  class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save
+            <button id="btnSaveCustomer" formaction="customer?option=ADD" formmethod="post" form="customerForm"
+                    class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Customer
+            </button>
+            <button id="btnDeleteCustomer" class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete
                 Customer
             </button>
-            <button id="btnDeleteCustomer"  class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete
+            <button id="btnUpdateCustomer" class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update
                 Customer
             </button>
-            <button id="btnUpdateCustomer"  class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update
-                Customer
-            </button>
-            <button id="btnGetAllCustomers"  class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get
+            <button id="btnGetAllCustomers" class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get
                 All
             </button>
         </div>
