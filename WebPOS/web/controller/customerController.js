@@ -142,8 +142,8 @@ $("#btnSaveCustomer").click(function () {
 }*/
 
 /*bind events to table*/
-function bindEventToCustomer() {
-    /*get customer detail from table*/
+/*function bindEventToCustomer() {
+    /!*get customer detail from table*!/
     $("#tblCustomer>tr").click(function () {
 
         let col1 = $(this).children().eq(0).text();
@@ -151,12 +151,12 @@ function bindEventToCustomer() {
         let col3 = $(this).children().eq(2).text();
         let col4 = $(this).children().eq(3).text();
 
-        /*set values to input fields*/
+        /!*set values to input fields*!/
         $("#customerId").val(col1);
         $("#customerName").val(col2);
         $("#addressCus").val(col3);
         $("#tpNo").val(col4);
 
     });
-}
+}*/
 

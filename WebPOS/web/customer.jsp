@@ -138,14 +138,35 @@
         </table>
     </section>
 
+
 </main>
 
 <script src="assets/jquery-3.7.0.min.js"></script>
 <script src="assets/js/bootstrap.js"></script>
-<script src="db/db.js"></script>
-<script src="model/customerModel.js"></script>
-<script src="controller/customerController.js"></script>
 <script src="controller/validation/customerValidation.js"></script>
+<script>
+    function bindEventToCustomer() {
+        /*get customer detail from table*/
+        $("#tblCustomer>tr").click(function () {
+
+            let col1 = $(this).children().eq(0).text();
+            let col2 = $(this).children().eq(1).text();
+            let col3 = $(this).children().eq(2).text();
+            let col4 = $(this).children().eq(3).text();
+
+            /*set values to input fields*/
+            $("#customerId").val(col1.trim());
+            $("#customerName").val(col2);
+            $("#addressCus").val(col3);
+            $("#tpNo").val(col4.trim());
+
+            console.log(col1,col2,col3,col4);
+
+        });
+    }
+
+    bindEventToCustomer();
+</script>
 
 </body>
 </html>
