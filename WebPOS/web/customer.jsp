@@ -29,7 +29,7 @@
                         <a class="nav-link active" aria-current="page" href="#">Customer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="item.html">Items</a>
+                        <a class="nav-link" href="item.jsp">Items</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="placeOrder.html">Orders</a>
