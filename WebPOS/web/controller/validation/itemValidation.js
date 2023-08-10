@@ -1,7 +1,7 @@
 // validation for item
 const ITEM_CODE_REGEX = /^(I00-)[0-9]{3}$/;
 const ITEM_NAME_REGEX = /^[A-Za-z ]{3,}$/;
-const ITEM_PRICE_REGEX = /^[0-9]{2,}([.][0-9]{2})?$/;
+const ITEM_PRICE_REGEX = /^[0-9]{2,}([.][0-9])?$/;
 const ITEM_QTY_REGEX = /^[0-9]+$/;
 
 //add validations and text fields to the array
@@ -10,7 +10,7 @@ i_vArray.push({field: $("#itemCode1"), regEx: ITEM_CODE_REGEX, error: 'Item Code
 i_vArray.push({
     field: $("#itemName1"), regEx: ITEM_NAME_REGEX, error: 'Item Name Pattern Is Wrong : A-z 0-9 Ex: Naadu'
 });
-i_vArray.push({field: $("#price"), regEx: ITEM_PRICE_REGEX, error: 'Item Price Pattern Is Wrong : 100 or 100.00'});
+i_vArray.push({field: $("#price"), regEx: ITEM_PRICE_REGEX, error: 'Item Price Pattern Is Wrong : 100 or 100.0'});
 i_vArray.push({field: $("#qty"), regEx: ITEM_QTY_REGEX, error: 'Item Quantity Pattern Is Wrong : 0-9'});
 
 function clearItemInputFields() {

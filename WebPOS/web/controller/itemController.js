@@ -1,18 +1,18 @@
 /*to get existing items*/
-getAllItems();
+/*getAllItems();*/
 
 /*add event to getAll Items Btn*/
-$("#btnGetAllItems").click(function () {
+/*$("#btnGetAllItems").click(function () {
     getAllItems();
-});
+});*/
 
 /*add item to table*/
-$("#btnSaveItem").click(function () {
+/*$("#btnSaveItem").click(function () {
     saveItem();
-});
+});*/
 
 /*delete item*/
-$("#btnDeleteItem").click(function () {
+/*$("#btnDeleteItem").click(function () {
     let code = $("#itemCode1").val();
 
     let consent = confirm("Do you want to delete.?");
@@ -26,20 +26,20 @@ $("#btnDeleteItem").click(function () {
             alert("Item Not Removed..!");
         }
     }
-});
+});*/
 
 /*update item*/
-$("#btnUpdateItem").click(function () {
+/*$("#btnUpdateItem").click(function () {
     let code = $("#itemCode1").val();
     updateItem(code);
     clearItemInputFields();
-});
+});*/
 
 
 
 
 /*save item function*/
-function saveItem() {
+/*function saveItem() {
     let code = $("#itemCode1").val();
 
     if (searchItem(code.trim()) === undefined) {
@@ -62,17 +62,17 @@ function saveItem() {
         alert("Item already exits.!");
         clearItemInputFields();
     }
-}
+}*/
 
 /*search item function*/
-function searchItem(code) {
+/*function searchItem(code) {
     return itemDB.find(function (item) {
         return item.itemCode === code;
     });
-}
+}*/
 
 /*get all items function*/
-function getAllItems() {
+/*function getAllItems() {
 
     $("#tblItem").empty();
 
@@ -82,7 +82,7 @@ function getAllItems() {
         let price = itemDB[i].itemPrice;
         let qty = itemDB[i].itemQty;
 
-        /*create new row*/
+        /!*create new row*!/
         let tRow = ` <tr>
         <td>${code}</td>
         <td>${name}</td>
@@ -95,10 +95,10 @@ function getAllItems() {
         bindEventToItem();
 
     }
-}
+}*/
 
 /*delete item function*/
-function deleteItem(code) {
+/*function deleteItem(code) {
     for (let i = 0; i < itemDB.length; i++) {
         if (itemDB[i].itemCode === code) {
             itemDB.splice(i, 1);
@@ -106,10 +106,10 @@ function deleteItem(code) {
         }
     }
     return false;
-}
+}*/
 
 /*update item function*/
-function updateItem(code) {
+/*function updateItem(code) {
     if (searchItem(code) === undefined) {
         alert("No such Item..please check the Item Code");
     } else {
@@ -129,9 +129,10 @@ function updateItem(code) {
         }
     }
 
-}
+}*/
 
 /*bind events to table*/
+/*
 function bindEventToItem() {
 
     $("#tblItem>tr").click(function () {
@@ -141,11 +142,11 @@ function bindEventToItem() {
         let col3 = $(this).children().eq(2).text();
         let col4 = $(this).children().eq(3).text();
 
-        /*set values to input fields*/
+        /!*set values to input fields*!/
         $("#itemCode1").val(col1);
         $("#itemName1").val(col2);
         $("#price").val(col3);
         $("#qty").val(col4);
 
     });
-}
+}*/

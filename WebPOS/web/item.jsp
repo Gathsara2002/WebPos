@@ -1,3 +1,5 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="dto.ItemDTO" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,8 +110,26 @@
             </tr>
             </thead>
 
-            <tbody id="tblItem"></tbody>
+            <tbody id="tblItem">
 
+            <%
+                ArrayList<ItemDTO> items = (ArrayList<ItemDTO>) request.getAttribute("keyTwo");
+
+                if (items != null) {
+
+                    for (ItemDTO item : items) {
+            %>
+            <tr>
+                <td><%=item.getCode()%></td>
+                <td><%=item.getName()%></td>
+                <td><%=item.getPrice()%></td>
+                <td><%=item.getQty()%></td>
+            </tr>
+            <%
+                    }
+                }
+            %>
+            </tbody>
         </table>
     </section>
 
@@ -117,10 +137,30 @@
 
 <script src="assets/jquery-3.7.0.min.js"></script>
 <script src="assets/js/bootstrap.js"></script>
-<script src="db/db.js"></script>
 <script src="controller/validation/itemValidation.js"></script>
-<script src="controller/itemController.js"></script>
-<script src="model/itemModel.js"></script>
+<script>
+    function bindEventToItem() {
+
+        $("#tblItem>tr").click(function () {
+
+            let col1 = $(this).children().eq(0).text();
+            let col2 = $(this).children().eq(1).text();
+            let col3 = $(this).children().eq(2).text();
+            let col4 = $(this).children().eq(3).text();
+
+            /*set values to input fields*/
+            $("#itemCode1").val(col1.trim());
+            $("#itemName1").val(col2.trim());
+            $("#price").val(col3.trim());
+            $("#qty").val(col4.trim());
+
+            console.log(col1,col2,col3,col4)
+
+        });
+    }
+
+    bindEventToItem();
+</script>
 
 
 </body>

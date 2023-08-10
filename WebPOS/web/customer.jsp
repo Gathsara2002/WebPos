@@ -29,7 +29,7 @@
                         <a class="nav-link active" aria-current="page" href="#">Customer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="item.jsp">Items</a>
+                        <a class="nav-link" href="item">Items</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="placeOrder.html">Orders</a>
@@ -120,14 +120,10 @@
             %>
 
             <tr>
-                <td><%=customer.getId()%>
-                </td>
-                <td><%=customer.getName()%>
-                </td>
-                <td><%=customer.getAddress()%>
-                </td>
-                <td><%=customer.getTp()%>
-                </td>
+                <td><%=customer.getId()%></td>
+                <td><%=customer.getName()%></td>
+                <td><%=customer.getAddress()%></td>
+                <td><%=customer.getTp()%></td>
             </tr>
 
             <%

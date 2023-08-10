@@ -5,22 +5,46 @@
 
 package servlet;
 
+import dto.ItemDTO;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 @WebServlet(urlPatterns = "/item")
 public class ItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        ArrayList<ItemDTO> allItems=new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+            PreparedStatement pstm = connection.prepareStatement("select * from Item");
+            ResultSet resultSet = pstm.executeQuery();
+
+            while (resultSet.next()) {
+                String code = resultSet.getString(1);
+                String name = resultSet.getString(2);
+                double price = resultSet.getDouble(3);
+                double qty = resultSet.getDouble(4);
+
+                allItems.add(new ItemDTO(code,name,price,qty));
+            }
+
+            req.setAttribute("keyTwo",allItems);
+
+            req.getRequestDispatcher("item.jsp").forward(req,resp);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
