@@ -31,22 +31,79 @@ public class CustomerServlet extends HttpServlet {
         String tp = req.getParameter("cusTp");
         String option = req.getParameter("option");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
-            PreparedStatement pstm = connection.prepareStatement("insert into Customer values(?,?,?,?)");
-            pstm.setObject(1,id);
-            pstm.setObject(2,name);
-            pstm.setObject(3,address);
-            pstm.setObject(4,tp);
-            boolean isAdded = pstm.executeUpdate() > 0;
 
-            if (isAdded) {
-                System.out.println("customer added successfully");
-            }
+        /*use switch because add , delete , update all task execute under post method*/
 
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+        switch (option) {
+
+            case "ADD":
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+                    PreparedStatement pstm = connection.prepareStatement("insert into Customer values(?,?,?,?)");
+                    pstm.setObject(1, id);
+                    pstm.setObject(2, name);
+                    pstm.setObject(3, address);
+                    pstm.setObject(4, tp);
+                    boolean isAdded = pstm.executeUpdate() > 0;
+
+                    if (isAdded) {
+                        System.out.println("customer added successfully");
+                    }
+
+                    resp.sendRedirect("customer.jsp");
+
+                } catch (ClassNotFoundException | SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case "DELETE":
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+                    PreparedStatement pstm = connection.prepareStatement("delete from Customer where id=?");
+                    pstm.setObject(1, id);
+
+                    boolean isDeleted = pstm.executeUpdate() > 0;
+
+                    if (isDeleted) {
+                        System.out.println("customer deleted successfully");
+                    }
+
+                    resp.sendRedirect("customer.jsp");
+
+                } catch (ClassNotFoundException | SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case "UPDATE":
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+                    PreparedStatement pstm = connection.prepareStatement("update  Customer set name=?,address=?,telephone=? where id=?");
+                    pstm.setObject(1, name);
+                    pstm.setObject(2, address);
+                    pstm.setObject(3, tp);
+                    pstm.setObject(4, id);
+
+                    boolean isUpdated = pstm.executeUpdate() > 0;
+
+                    if (isUpdated) {
+                        System.out.println("customer updated");
+                    }
+
+                    resp.sendRedirect("customer.jsp");
+
+                } catch (ClassNotFoundException | SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            default:
+                resp.sendRedirect("customer.jsp");
+                break;
         }
     }
 }

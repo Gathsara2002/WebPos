@@ -83,14 +83,14 @@
             <button id="btnSaveCustomer" formaction="customer?option=ADD" formmethod="post" form="customerForm"
                     class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Customer
             </button>
-            <button id="btnDeleteCustomer" class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete
-                Customer
+            <button id="btnDeleteCustomer" formaction="customer?option=DELETE" formmethod="post" form="customerForm"
+                    class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Customer
             </button>
-            <button id="btnUpdateCustomer" class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update
-                Customer
+            <button id="btnUpdateCustomer" formaction="customer?option=UPDATE" formmethod="post" form="customerForm"
+                    class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Customer
             </button>
-            <button id="btnGetAllCustomers" class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get
-                All
+            <button id="btnGetAllCustomers" formaction="customer" formmethod="get" form="customerForm"
+                    class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get All
             </button>
         </div>
 
