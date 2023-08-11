@@ -32,7 +32,7 @@
                         <a class="nav-link" href="item">Items</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="placeOrder.html">Orders</a>
+                        <a class="nav-link" href="placeOrder.jsp">Orders</a>
                     </li>
                 </ul>
                 <div class="d-grid gap-3 d-md-flex justify-content-md-end">
