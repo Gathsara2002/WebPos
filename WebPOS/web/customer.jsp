@@ -96,8 +96,12 @@
             <button id="btnDeleteCustomer" formaction="customer?option=DELETE" formmethod="post" form="customerForm"
                     class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Customer
             </button>
-            <button id="btnUpdateCustomer" formaction="customer?option=UPDATE" formmethod="post" form="customerForm"
-                    class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Customer
+            <%-- <button id="btnUpdateCustomer" formaction="customer?option=UPDATE" formmethod="post" form="customerForm"
+                     class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Customer
+             </button>--%>
+
+            <button id="btnUpdateCustomer" type="button" class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">
+                Update Customer
             </button>
             <button id="btnGetAllCustomers" formaction="customer" formmethod="get" form="customerForm"
                     class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get All
@@ -187,6 +191,21 @@
             data: formData,
             success: function (res) {
                 console.log("customer saved successfully!")
+            }
+        });
+    });
+
+    /*update customer with ajax*/
+    $("#btnUpdateCustomer").click(function () {
+
+        /*get input values from frontend*/
+        let formData = $("#customerForm").serialize();
+        $.ajax({
+            url: "customer?option=UPDATE",
+            method: "post",
+            data: formData,
+            success: function (res) {
+                console.log("customer updated successfully!")
             }
         });
     });
