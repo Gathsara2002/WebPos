@@ -73,7 +73,8 @@ public class CustomerServlet extends HttpServlet {
                         System.out.println("customer added successfully");
                     }
 
-                    resp.sendRedirect("customer");
+                    /*no need to redirect request because use of ajax, page is not refresh */
+                    /*resp.sendRedirect("customer");*/
 
                 } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
@@ -93,7 +94,7 @@ public class CustomerServlet extends HttpServlet {
                         System.out.println("customer deleted successfully");
                     }
 
-                    resp.sendRedirect("customer");
+                    /*resp.sendRedirect("customer");*/
 
                 } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
@@ -116,7 +117,7 @@ public class CustomerServlet extends HttpServlet {
                         System.out.println("customer updated");
                     }
 
-                    resp.sendRedirect("customer");
+                    /*resp.sendRedirect("customer");*/
 
                 } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
