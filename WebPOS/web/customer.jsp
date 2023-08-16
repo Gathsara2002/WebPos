@@ -84,29 +84,30 @@
         <div class="col-4 mt-5">
 
             <%--refactored actions with ajax--%>
-
             <%--<button id="btnSaveCustomer" formaction="customer?option=ADD" formmethod="post" form="customerForm"
                     class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Customer
             </button>--%>
-
-            <button id="btnSaveCustomer" class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3" type="button">
-                Save Customer
-            </button>
 
             <%-- <button id="btnDeleteCustomer" formaction="customer?option=DELETE" formmethod="post" form="customerForm"
                      class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Customer
              </button>--%>
 
-            <button id="btnDeleteCustomer" type="button" class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete
-                Customer
-            </button>
             <%-- <button id="btnUpdateCustomer" formaction="customer?option=UPDATE" formmethod="post" form="customerForm"
                      class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Customer
              </button>--%>
 
+            <button id="btnSaveCustomer" class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3" type="button">
+                Save Customer
+            </button>
+
+            <button id="btnDeleteCustomer" type="button" class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete
+                Customer
+            </button>
+
             <button id="btnUpdateCustomer" type="button" class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">
                 Update Customer
             </button>
+
             <button id="btnGetAllCustomers" formaction="customer" formmethod="get" form="customerForm"
                     class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get All
             </button>
