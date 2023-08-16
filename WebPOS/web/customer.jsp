@@ -82,9 +82,17 @@
 
         <!--Buttons-->
         <div class="col-4 mt-5">
-            <button id="btnSaveCustomer" formaction="customer?option=ADD" formmethod="post" form="customerForm"
+
+            <%--refactored actions with ajax--%>
+
+            <%--<button id="btnSaveCustomer" formaction="customer?option=ADD" formmethod="post" form="customerForm"
                     class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Customer
+            </button>--%>
+
+            <button id="btnSaveCustomer" class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3" type="button">
+                Save Customer
             </button>
+
             <button id="btnDeleteCustomer" formaction="customer?option=DELETE" formmethod="post" form="customerForm"
                     class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Customer
             </button>
@@ -120,10 +128,14 @@
             %>
 
             <tr>
-                <td><%=customer.getId()%></td>
-                <td><%=customer.getName()%></td>
-                <td><%=customer.getAddress()%></td>
-                <td><%=customer.getTp()%></td>
+                <td><%=customer.getId()%>
+                </td>
+                <td><%=customer.getName()%>
+                </td>
+                <td><%=customer.getAddress()%>
+                </td>
+                <td><%=customer.getTp()%>
+                </td>
             </tr>
 
             <%
@@ -141,6 +153,7 @@
 <script src="assets/js/bootstrap.js"></script>
 <script src="controller/validation/customerValidation.js"></script>
 <script>
+    /*click table row and get values from it*/
     function bindEventToCustomer() {
         /*get customer detail from table*/
         $("#tblCustomer>tr").click(function () {
@@ -156,12 +169,28 @@
             $("#addressCus").val(col3);
             $("#tpNo").val(col4.trim());
 
-            console.log(col1,col2,col3,col4);
+            console.log(col1, col2, col3, col4);
 
         });
     }
 
     bindEventToCustomer();
+
+    /*add customer with ajax*/
+    $("#btnSaveCustomer").click(function () {
+
+        /*get input values from frontend*/
+        let formData = $("#customerForm").serialize();
+        $.ajax({
+            url: "customer?option=ADD",
+            method: "post",
+            data: formData,
+            success: function (res) {
+                console.log("customer saved successfully!")
+            }
+        });
+    });
+
 </script>
 
 </body>
