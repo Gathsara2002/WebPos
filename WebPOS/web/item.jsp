@@ -82,9 +82,12 @@
 
         <!--Buttons-->
         <div class="col-4 mt-5">
-            <button id="btnSaveItem" form="itemForm" formmethod="post" formaction="item?option=ADD"
+            <%--<button id="btnSaveItem" form="itemForm" formmethod="post" formaction="item?option=ADD"
                     class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Item
-            </button>
+            </button>--%>
+
+            <button id="btnSaveItem" class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Item</button>
+
             <button id="btnDeleteItem" form="itemForm" formmethod="post" formaction="item?option=DELETE"
                     class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Item
             </button>
@@ -120,10 +123,14 @@
                     for (ItemDTO item : items) {
             %>
             <tr>
-                <td><%=item.getCode()%></td>
-                <td><%=item.getName()%></td>
-                <td><%=item.getPrice()%></td>
-                <td><%=item.getQty()%></td>
+                <td><%=item.getCode()%>
+                </td>
+                <td><%=item.getName()%>
+                </td>
+                <td><%=item.getPrice()%>
+                </td>
+                <td><%=item.getQty()%>
+                </td>
             </tr>
             <%
                     }
@@ -154,12 +161,27 @@
             $("#price").val(col3.trim());
             $("#qty").val(col4.trim());
 
-            console.log(col1,col2,col3,col4)
+            console.log(col1, col2, col3, col4)
 
         });
     }
 
     bindEventToItem();
+
+    /*add item*/
+    $("#btnSaveItem").click(function () {
+
+        let formData = $("#itemForm").serialize();
+        $.ajax({
+            url: "item?option=ADD",
+            method: "post",
+            data: formData,
+            success: function (resp) {
+                console.log(resp);
+            }
+        });
+    });
+
 </script>
 
 
