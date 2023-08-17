@@ -7,6 +7,9 @@ package servlet;
 
 import dto.ItemDTO;
 
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,13 +24,13 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ArrayList<ItemDTO> allItems = new ArrayList<>();
-
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
             PreparedStatement pstm = connection.prepareStatement("select * from Item");
             ResultSet resultSet = pstm.executeQuery();
+
+            JsonArrayBuilder allItems = Json.createArrayBuilder();
 
             while (resultSet.next()) {
                 String code = resultSet.getString(1);
@@ -35,12 +38,17 @@ public class ItemServlet extends HttpServlet {
                 double price = resultSet.getDouble(3);
                 double qty = resultSet.getDouble(4);
 
-                allItems.add(new ItemDTO(code, name, price, qty));
+                JsonObjectBuilder itemObj = Json.createObjectBuilder();
+                itemObj.add("code",code);
+                itemObj.add("name",name);
+                itemObj.add("price",price);
+                itemObj.add("qty",qty);
+
+                allItems.add(itemObj.build());
             }
 
-            req.setAttribute("keyTwo", allItems);
+            resp.getWriter().print(allItems.build());
 
-            req.getRequestDispatcher("item.html").forward(req, resp);
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

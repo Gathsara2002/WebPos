@@ -80,26 +80,32 @@
 
         <!--Buttons-->
         <div class="col-4 mt-5">
-          <!--  <%&#45;&#45;<button id="btnSaveItem" form="itemForm" formmethod="post" formaction="item?option=ADD"
-                    class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Item
-            </button>&#45;&#45;%>
+            <!--  <%&#45;&#45;<button id="btnSaveItem" form="itemForm" formmethod="post" formaction="item?option=ADD"
+                      class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Item
+              </button>&#45;&#45;%>
 
-            <%&#45;&#45; <button id="btnDeleteItem" form="itemForm" formmethod="post" formaction="item?option=DELETE"
-                     class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Item
-             </button>&#45;&#45;%>
+              <%&#45;&#45; <button id="btnDeleteItem" form="itemForm" formmethod="post" formaction="item?option=DELETE"
+                       class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Item
+               </button>&#45;&#45;%>
 
-            <%&#45;&#45; <button id="btnUpdateItem" form="itemForm" formmethod="post" formaction="item?option=UPDATE"
-                      class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Item
-              </button>&#45;&#45;%>-->
+              <%&#45;&#45; <button id="btnUpdateItem" form="itemForm" formmethod="post" formaction="item?option=UPDATE"
+                        class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Item
+                </button>&#45;&#45;%>-->
 
-            <button id="btnSaveItem" class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Item</button>
+            <button type="button" id="btnSaveItem" class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save
+                Item
+            </button>
 
-            <button id="btnDeleteItem" class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Item</button>
+            <button type="button" id="btnDeleteItem" class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete
+                Item
+            </button>
 
-            <button id="btnUpdateItem" class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Item</button>
+            <button type="button" id="btnUpdateItem" class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update
+                Item
+            </button>
 
-            <button id="btnGetAllItems" form="itemForm" formmethod="get" formaction="item"
-                    class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get All
+            <button type="button" id="btnGetAllItems" class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get
+                All
             </button>
         </div>
 
@@ -119,27 +125,27 @@
 
             <tbody id="tblItem">
 
-           <!-- <%
-                ArrayList<ItemDTO> items = (ArrayList<ItemDTO>) request.getAttribute("keyTwo");
+            <!-- <%
+                 ArrayList<ItemDTO> items = (ArrayList<ItemDTO>) request.getAttribute("keyTwo");
 
-                if (items != null) {
+                 if (items != null) {
 
-                    for (ItemDTO item : items) {
-            %>
-            <tr>
-                <td><%=item.getCode()%>
-                </td>
-                <td><%=item.getName()%>
-                </td>
-                <td><%=item.getPrice()%>
-                </td>
-                <td><%=item.getQty()%>
-                </td>
-            </tr>
-            <%
-                    }
-                }
-            %>-->
+                     for (ItemDTO item : items) {
+             %>
+             <tr>
+                 <td><%=item.getCode()%>
+                 </td>
+                 <td><%=item.getName()%>
+                 </td>
+                 <td><%=item.getPrice()%>
+                 </td>
+                 <td><%=item.getQty()%>
+                 </td>
+             </tr>
+             <%
+                     }
+                 }
+             %>-->
             </tbody>
         </table>
     </section>
@@ -211,6 +217,16 @@
             data: formData,
             success: function (resp) {
                 console.log(resp);
+            }
+        });
+    });
+
+    /*get all items*/
+    $("#btnGetAllItems").click(function () {
+        $.ajax({
+            url:"item",
+            success:function () {
+
             }
         });
     });
