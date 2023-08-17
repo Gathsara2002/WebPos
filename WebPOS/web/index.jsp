@@ -41,7 +41,7 @@
                         <a class="nav-link" href="customer.html">Customer</a>
                     </li>
                     <li id="items" class="nav-item">
-                        <a class="nav-link" href="item">Items</a>
+                        <a class="nav-link" href="item.html">Items</a>
                     </li>
                     <li id="orders" class="nav-item">
                         <a class="nav-link" href="placeOrder.jsp">Orders</a>
