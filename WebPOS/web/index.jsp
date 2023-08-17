@@ -38,7 +38,7 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li id="customer" class="nav-item">
-                        <a class="nav-link" href="customer">Customer</a>
+                        <a class="nav-link" href="customer.html">Customer</a>
                     </li>
                     <li id="items" class="nav-item">
                         <a class="nav-link" href="item">Items</a>

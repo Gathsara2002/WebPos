@@ -7,6 +7,9 @@ package servlet;
 
 import dto.CustomerDTO;
 
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,14 +22,17 @@ import java.util.ArrayList;
 @WebServlet(urlPatterns = "/customer")
 public class CustomerServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        ArrayList<CustomerDTO> allCustomers = new ArrayList<>();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { ;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
             PreparedStatement pstm = connection.prepareStatement("select * from Customer");
             ResultSet resultSet = pstm.executeQuery();
+            /*add response header*//*
+            resp.addHeader("Content-Type","application/json");
+
+            *//*create json array*//*
+            JsonArrayBuilder allCustomers = Json.createArrayBuilder();
 
             while (resultSet.next()) {
                 String id = resultSet.getString(1);
@@ -34,12 +40,18 @@ public class CustomerServlet extends HttpServlet {
                 String address = resultSet.getString(3);
                 int tp = Integer.parseInt(resultSet.getString(4));
 
-                allCustomers.add(new CustomerDTO(id, name, address, tp));
+               *//*create json object to add json array*//*
+                JsonObjectBuilder customerObj = Json.createObjectBuilder();
+                customerObj.add("id",id);
+                customerObj.add("name",name);
+                customerObj.add("address",address);
+                customerObj.add("tp",tp);
+
+                allCustomers.add(customerObj.build());
             }
-            req.setAttribute("keyOne", allCustomers);
 
-            req.getRequestDispatcher("customer.jsp").forward(req, resp);
-
+            resp.getWriter().print(allCustomers.build());
+*/
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -125,7 +137,7 @@ public class CustomerServlet extends HttpServlet {
                 break;
 
             default:
-                resp.sendRedirect("customer.jsp");
+                resp.sendRedirect("customer.html");
                 break;
         }
     }
