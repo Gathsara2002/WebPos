@@ -28,6 +28,8 @@ public class ItemServlet extends HttpServlet {
             PreparedStatement pstm = connection.prepareStatement("select * from Item");
             ResultSet resultSet = pstm.executeQuery();
 
+            resp.addHeader("Content-Type", "application/json");
+
             JsonArrayBuilder allItems = Json.createArrayBuilder();
 
             while (resultSet.next()) {
@@ -37,10 +39,10 @@ public class ItemServlet extends HttpServlet {
                 double qty = resultSet.getDouble(4);
 
                 JsonObjectBuilder itemObj = Json.createObjectBuilder();
-                itemObj.add("code",code);
-                itemObj.add("name",name);
-                itemObj.add("price",price);
-                itemObj.add("qty",qty);
+                itemObj.add("code", code);
+                itemObj.add("name", name);
+                itemObj.add("price", price);
+                itemObj.add("qty", qty);
 
                 allItems.add(itemObj.build());
             }

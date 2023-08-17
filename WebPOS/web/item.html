@@ -178,6 +178,7 @@
     }
 
     bindEventToItem();
+    loadAllItems();
 
     /*add item*/
     $("#btnSaveItem").click(function () {
@@ -189,6 +190,8 @@
             data: formData,
             success: function (resp) {
                 console.log(resp);
+                loadAllItems();
+                clearInputFieldsItems();
             }
         });
     });
@@ -203,6 +206,8 @@
             data: formData,
             success: function (resp) {
                 console.log(resp);
+                loadAllItems();
+                clearInputFieldsItems();
             }
         });
     });
@@ -217,15 +222,22 @@
             data: formData,
             success: function (resp) {
                 console.log(resp);
+                loadAllItems();
+                clearInputFieldsItems();
             }
         });
     });
 
     /*get all items*/
     $("#btnGetAllItems").click(function () {
+        loadAllItems()
+    });
+
+    /*load all item function*/
+    function loadAllItems() {
         $.ajax({
-            url:"item",
-            success:function (resp) {
+            url: "item",
+            success: function (resp) {
                 $("#tblItem").empty();
                 for (let item of resp) {
                     let row = `<tr>
@@ -239,7 +251,15 @@
                 }
             }
         });
-    });
+    }
+
+    /*clear input fields function*/
+    function clearInputFieldsItems() {
+        $("#itemCode1").val("");
+        $("#itemName1").val("");
+        $("#price").val("");
+        $("#qty").val("");
+    }
 
 
 </script>
