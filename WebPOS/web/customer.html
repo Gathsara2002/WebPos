@@ -165,6 +165,7 @@
         /*get customer detail from table*/
         $("#tblCustomer>tr").click(function () {
 
+            console.log("clicked");
             let col1 = $(this).children().eq(0).text();
             let col2 = $(this).children().eq(1).text();
             let col3 = $(this).children().eq(2).text();
@@ -196,6 +197,7 @@
             success: function (res) {
                 console.log("customer saved successfully!");
                 loadAllCustomers();
+                clearInputFields();
             }
         });
     });
@@ -212,6 +214,7 @@
             success: function (res) {
                 console.log("customer updated successfully!");
                 loadAllCustomers();
+                clearInputFields();
             }
         });
     });
@@ -228,6 +231,7 @@
             success: function (res) {
                 console.log("customer deleted successfully!");
                 loadAllCustomers();
+                clearInputFields();
             }
         });
     });
@@ -252,9 +256,15 @@
                     <td>${cus.tp}</td>
                 </tr>`;
                     $("#tblCustomer").append(row);
+                    bindEventToCustomer();
                 }
             }
         });
+    }
+
+    /*clear input fields*/
+    function clearInputFields() {
+        $("#customerId,#customerName,#addressCus,#tpNo").val("");
     }
 
 
