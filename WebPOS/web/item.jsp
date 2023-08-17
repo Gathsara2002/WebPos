@@ -88,9 +88,13 @@
 
             <button id="btnSaveItem" class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Item</button>
 
-            <button id="btnDeleteItem" form="itemForm" formmethod="post" formaction="item?option=DELETE"
+           <%-- <button id="btnDeleteItem" form="itemForm" formmethod="post" formaction="item?option=DELETE"
                     class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Item
-            </button>
+            </button>--%>
+
+                <button id="btnDeleteItem"
+                        class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Item
+                </button>
             <button id="btnUpdateItem" form="itemForm" formmethod="post" formaction="item?option=UPDATE"
                     class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Item
             </button>
@@ -174,6 +178,20 @@
         let formData = $("#itemForm").serialize();
         $.ajax({
             url: "item?option=ADD",
+            method: "post",
+            data: formData,
+            success: function (resp) {
+                console.log(resp);
+            }
+        });
+    });
+
+    /*delete item*/
+    $("#btnDeleteItem").click(function () {
+
+        let formData = $("#itemForm").serialize();
+        $.ajax({
+            url: "item?option=DELETE",
             method: "post",
             data: formData,
             success: function (resp) {
