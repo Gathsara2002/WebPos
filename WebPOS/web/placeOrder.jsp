@@ -23,10 +23,10 @@
                         <a class="nav-link" href="index.jsp">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="customer">Customer</a>
+                        <a class="nav-link" href="customer.html">Customer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="item">Items</a>
+                        <a class="nav-link" href="item.html">Items</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Order</a>
