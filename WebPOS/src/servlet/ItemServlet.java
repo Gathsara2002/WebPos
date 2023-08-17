@@ -21,7 +21,7 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ArrayList<ItemDTO> allItems=new ArrayList<>();
+        ArrayList<ItemDTO> allItems = new ArrayList<>();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -35,12 +35,12 @@ public class ItemServlet extends HttpServlet {
                 double price = resultSet.getDouble(3);
                 double qty = resultSet.getDouble(4);
 
-                allItems.add(new ItemDTO(code,name,price,qty));
+                allItems.add(new ItemDTO(code, name, price, qty));
             }
 
-            req.setAttribute("keyTwo",allItems);
+            req.setAttribute("keyTwo", allItems);
 
-            req.getRequestDispatcher("item.jsp").forward(req,resp);
+            req.getRequestDispatcher("item.jsp").forward(req, resp);
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
