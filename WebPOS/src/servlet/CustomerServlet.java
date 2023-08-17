@@ -39,13 +39,13 @@ public class CustomerServlet extends HttpServlet {
                 String id = resultSet.getString(1);
                 String name = resultSet.getString(2);
                 String address = resultSet.getString(3);
-                int tp = Integer.parseInt(resultSet.getString(4));
+                int tp = resultSet.getInt(4);
 
                 /*create json object to add json array*/
                 JsonObjectBuilder customerObj = Json.createObjectBuilder();
-                customerObj.add("id", id);
-                customerObj.add("name", name);
-                customerObj.add("address", address);
+                customerObj.add("id", id.trim());
+                customerObj.add("name", name.trim());
+                customerObj.add("address", address.trim());
                 customerObj.add("tp", tp);
 
                 allCustomers.add(customerObj.build());
