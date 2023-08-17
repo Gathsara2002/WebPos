@@ -71,7 +71,7 @@ public class ItemServlet extends HttpServlet {
                     if (i > 0) {
                         System.out.println("item saved");
                     }
-                    resp.sendRedirect("item");
+                    /*resp.sendRedirect("item");*/
 
 
                 } catch (ClassNotFoundException | SQLException e) {
@@ -90,7 +90,7 @@ public class ItemServlet extends HttpServlet {
                     if (i > 0) {
                         System.out.println("item deleted");
                     }
-                    resp.sendRedirect("item");
+                    /*resp.sendRedirect("item");*/
 
 
                 } catch (ClassNotFoundException | SQLException e) {
@@ -112,8 +112,7 @@ public class ItemServlet extends HttpServlet {
                     if (i > 0) {
                         System.out.println("item updated");
                     }
-
-                    resp.sendRedirect("item");
+                    /*resp.sendRedirect("item");*/
 
                 } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
