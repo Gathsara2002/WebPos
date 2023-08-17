@@ -182,6 +182,7 @@
     }
 
     bindEventToCustomer();
+    loadAllCustomers();
 
     /*add customer with ajax*/
     $("#btnSaveCustomer").click(function () {
@@ -193,7 +194,8 @@
             method: "post",
             data: formData,
             success: function (res) {
-                console.log("customer saved successfully!")
+                console.log("customer saved successfully!");
+                loadAllCustomers();
             }
         });
     });
@@ -208,7 +210,8 @@
             method: "post",
             data: formData,
             success: function (res) {
-                console.log("customer updated successfully!")
+                console.log("customer updated successfully!");
+                loadAllCustomers();
             }
         });
     });
@@ -223,13 +226,19 @@
             method: "post",
             data: formData,
             success: function (res) {
-                console.log("customer deleted successfully!")
+                console.log("customer deleted successfully!");
+                loadAllCustomers();
             }
         });
     });
 
     /*get all*/
     $("#btnGetAllCustomers").click(function () {
+        loadAllCustomers();
+    });
+
+    /*function to load all customers*/
+    function loadAllCustomers() {
         $.ajax({
             url: "customer",
             success: function (resp) {
@@ -246,7 +255,7 @@
                 }
             }
         });
-    });
+    }
 
 
 </script>
