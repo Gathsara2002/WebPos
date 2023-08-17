@@ -5,7 +5,6 @@
 
 package servlet;
 
-import dto.ItemDTO;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 
 @WebServlet(urlPatterns = "/item")
 public class ItemServlet extends HttpServlet {

@@ -225,8 +225,18 @@
     $("#btnGetAllItems").click(function () {
         $.ajax({
             url:"item",
-            success:function () {
-
+            success:function (resp) {
+                $("#tblItem").empty();
+                for (let item of resp) {
+                    let row = `<tr>
+                    <td>${item.code}</td>
+                    <td>${item.name}</td>
+                    <td>${item.price}</td>
+                    <td>${item.qty}</td>
+                </tr>`;
+                    $("#tblItem").append(row);
+                    bindEventToItem();
+                }
             }
         });
     });
