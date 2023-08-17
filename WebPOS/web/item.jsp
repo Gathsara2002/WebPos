@@ -86,22 +86,20 @@
                     class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Item
             </button>--%>
 
+            <%-- <button id="btnDeleteItem" form="itemForm" formmethod="post" formaction="item?option=DELETE"
+                     class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Item
+             </button>--%>
+
+            <%-- <button id="btnUpdateItem" form="itemForm" formmethod="post" formaction="item?option=UPDATE"
+                      class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Item
+              </button>--%>
+
             <button id="btnSaveItem" class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Item</button>
 
-           <%-- <button id="btnDeleteItem" form="itemForm" formmethod="post" formaction="item?option=DELETE"
-                    class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Item
-            </button>--%>
+            <button id="btnDeleteItem" class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Item</button>
 
-                <button id="btnDeleteItem"
-                        class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Item
-                </button>
-      <%--      <button id="btnUpdateItem" form="itemForm" formmethod="post" formaction="item?option=UPDATE"
-                    class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Item
-            </button>--%>
+            <button id="btnUpdateItem" class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Item</button>
 
-                <button id="btnUpdateItem"
-                        class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Item
-                </button>
             <button id="btnGetAllItems" form="itemForm" formmethod="get" formaction="item"
                     class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get All
             </button>
@@ -154,6 +152,7 @@
 <script src="assets/js/bootstrap.js"></script>
 <script src="controller/validation/itemValidation.js"></script>
 <script>
+
     function bindEventToItem() {
 
         $("#tblItem>tr").click(function () {
