@@ -40,7 +40,7 @@ public class ItemServlet extends HttpServlet {
 
             req.setAttribute("keyTwo", allItems);
 
-            req.getRequestDispatcher("item.jsp").forward(req, resp);
+            req.getRequestDispatcher("item.html").forward(req, resp);
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
