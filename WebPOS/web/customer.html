@@ -81,18 +81,18 @@
         <!--Buttons-->
         <div class="col-4 mt-5">
 
-           <!-- <%&#45;&#45;refactored actions with ajax&#45;&#45;%>
-            <%&#45;&#45;<button id="btnSaveCustomer" formaction="customer?option=ADD" formmethod="post" form="customerForm"
-                    class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Customer
-            </button>&#45;&#45;%>
-
-            <%&#45;&#45; <button id="btnDeleteCustomer" formaction="customer?option=DELETE" formmethod="post" form="customerForm"
-                     class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Customer
+            <!-- <%&#45;&#45;refactored actions with ajax&#45;&#45;%>
+             <%&#45;&#45;<button id="btnSaveCustomer" formaction="customer?option=ADD" formmethod="post" form="customerForm"
+                     class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3 ">Save Customer
              </button>&#45;&#45;%>
 
-            <%&#45;&#45; <button id="btnUpdateCustomer" formaction="customer?option=UPDATE" formmethod="post" form="customerForm"
-                     class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Customer
-             </button>&#45;&#45;%>-->
+             <%&#45;&#45; <button id="btnDeleteCustomer" formaction="customer?option=DELETE" formmethod="post" form="customerForm"
+                      class="btn btn-outline-success btn-lg d-grid col-8 mb-3">Delete Customer
+              </button>&#45;&#45;%>
+
+             <%&#45;&#45; <button id="btnUpdateCustomer" formaction="customer?option=UPDATE" formmethod="post" form="customerForm"
+                      class="btn btn-outline-danger btn-lg d-grid  col-8 mb-3">Update Customer
+              </button>&#45;&#45;%>-->
 
             <button id="btnSaveCustomer" class="btn btn-outline-primary btn-lg d-grid  col-8 mb-3" type="button">
                 Save Customer
@@ -106,8 +106,8 @@
                 Update Customer
             </button>
 
-            <button id="btnGetAllCustomers" type="button"
-                    class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get All
+            <button id="btnGetAllCustomers" type="button" class="btn btn-outline-warning btn-lg d-grid  col-8 mb-3">Get
+                All
             </button>
         </div>
 
@@ -127,28 +127,28 @@
 
             <tbody id="tblCustomer">
 
-           <!-- <%&#45;&#45; <%
-                 ArrayList<CustomerDTO> customers = (ArrayList<CustomerDTO>) request.getAttribute("keyOne");
+            <!-- <%&#45;&#45; <%
+                  ArrayList<CustomerDTO> customers = (ArrayList<CustomerDTO>) request.getAttribute("keyOne");
 
-                 if (customers != null) {
-                     for (CustomerDTO customer : customers) {
-             %>
+                  if (customers != null) {
+                      for (CustomerDTO customer : customers) {
+              %>
 
-             <tr>
-                 <td><%=customer.getId()%>
-                 </td>
-                 <td><%=customer.getName()%>
-                 </td>
-                 <td><%=customer.getAddress()%>
-                 </td>
-                 <td><%=customer.getTp()%>
-                 </td>
-             </tr>
+              <tr>
+                  <td><%=customer.getId()%>
+                  </td>
+                  <td><%=customer.getName()%>
+                  </td>
+                  <td><%=customer.getAddress()%>
+                  </td>
+                  <td><%=customer.getTp()%>
+                  </td>
+              </tr>
 
-             <%
-                     }
-                 }
-             %>&#45;&#45;%>-->
+              <%
+                      }
+                  }
+              %>&#45;&#45;%>-->
             </tbody>
         </table>
     </section>
@@ -224,6 +224,26 @@
             data: formData,
             success: function (res) {
                 console.log("customer deleted successfully!")
+            }
+        });
+    });
+
+    /*get all*/
+    $("#btnGetAllCustomers").click(function () {
+        $.ajax({
+            url: "customer",
+            success: function (resp) {
+                console.log(resp);
+                $("#tblCustomer").empty();
+                for (let cus of resp) {
+                    let row = `<tr>
+                    <td>${cus.id}</td>
+                    <td>${cus.name}</td>
+                    <td>${cus.address}</td>
+                    <td>${cus.salary}</td>
+                </tr>`;
+                    $("#tblCustomer").append(row);
+                }
             }
         });
     });
