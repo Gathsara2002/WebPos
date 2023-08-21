@@ -224,7 +224,7 @@
 
         let id = $("#customerId").val();
         $.ajax({
-            url: "customer?cusId=" +id,
+            url: "customer?cusId=" + id,
             method: "delete",
             success: function (res) {
                 console.log("customer deleted successfully!");

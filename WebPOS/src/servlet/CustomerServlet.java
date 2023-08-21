@@ -92,26 +92,6 @@ public class CustomerServlet extends HttpServlet {
                 }
                 break;
 
-          /*  case "DELETE":
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
-                    PreparedStatement pstm = connection.prepareStatement("delete from Customer where id=?");
-                    pstm.setObject(1, id);
-
-                    boolean isDeleted = pstm.executeUpdate() > 0;
-
-                    if (isDeleted) {
-                        System.out.println("customer deleted successfully");
-                    }
-
-                    *//*resp.sendRedirect("customer");*//*
-
-                } catch (ClassNotFoundException | SQLException e) {
-                    e.printStackTrace();
-                }
-                break;*/
-
             case "UPDATE":
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
@@ -162,6 +142,5 @@ public class CustomerServlet extends HttpServlet {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-
     }
 }
