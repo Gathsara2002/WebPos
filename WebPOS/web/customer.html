@@ -222,12 +222,10 @@
     /*delete customer with ajax*/
     $("#btnDeleteCustomer").click(function () {
 
-        /*get input values from frontend*/
-        let formData = $("#customerForm").serialize();
+        let id = $("#customerId").val();
         $.ajax({
-            url: "customer?option=DELETE",
-            method: "post",
-            data: formData,
+            url: "customer?cusId=" +id,
+            method: "delete",
             success: function (res) {
                 console.log("customer deleted successfully!");
                 loadAllCustomers();
