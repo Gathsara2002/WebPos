@@ -87,7 +87,7 @@ public class ItemServlet extends HttpServlet {
                 }
                 break;
 
-            case "DELETE":
+           /* case "DELETE":
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
@@ -98,13 +98,13 @@ public class ItemServlet extends HttpServlet {
                     if (i > 0) {
                         System.out.println("item deleted");
                     }
-                    /*resp.sendRedirect("item");*/
+                    *//*resp.sendRedirect("item");*//*
 
 
                 } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
                 }
-                break;
+                break;*/
 
             case "UPDATE":
                 try {
@@ -131,5 +131,28 @@ public class ItemServlet extends HttpServlet {
                 resp.sendRedirect("item");
                 break;
         }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String code = req.getParameter("code");
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+            PreparedStatement pstm = connection.prepareStatement("delete from Item where code=?");
+            pstm.setObject(1, code);
+
+            int i = pstm.executeUpdate();
+            if (i > 0) {
+                System.out.println("item deleted");
+            }
+            /*resp.sendRedirect("item");*/
+
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
