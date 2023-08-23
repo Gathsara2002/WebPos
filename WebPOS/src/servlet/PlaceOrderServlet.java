@@ -55,7 +55,7 @@ public class PlaceOrderServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        /*get item details*/
+       /* *//*get item details*//*
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
@@ -83,9 +83,8 @@ public class PlaceOrderServlet extends HttpServlet {
 
             resp.getWriter().print(allItems.build());
 
-
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }
