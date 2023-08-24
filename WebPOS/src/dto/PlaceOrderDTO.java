@@ -13,21 +13,23 @@ public class PlaceOrderDTO {
     private String price;
     private String qty;
     private int total;
+    private String date;
 
     public PlaceOrderDTO() {
     }
 
-    public PlaceOrderDTO(String code, String itemName, String price, String qty, int total) {
+    public PlaceOrderDTO(String oid, String cid, String code, String itemName, String price, String qty, int total, String date) {
+        this.oid = oid;
+        this.cid = cid;
         this.code = code;
         this.itemName = itemName;
         this.price = price;
         this.qty = qty;
         this.total = total;
+        this.date = date;
     }
 
-    public PlaceOrderDTO(String oid, String cid, String code, String itemName, String price, String qty, int total) {
-        this.oid = oid;
-        this.cid = cid;
+    public PlaceOrderDTO(String code, String itemName, String price, String qty, int total) {
         this.code = code;
         this.itemName = itemName;
         this.price = price;
@@ -89,5 +91,13 @@ public class PlaceOrderDTO {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
