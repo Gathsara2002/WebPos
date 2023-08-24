@@ -268,9 +268,8 @@
 
     /*set customer detail when combo box click*/
     $("#cusId").click(function () {
-        console.log("clicked")
+
         let name = $("#cusId").val();
-        console.log(name);
 
         $.ajax({
             url: "customer",
@@ -282,8 +281,6 @@
                         let address = resp[i].address;
                         let tel = resp[i].tp;
 
-                        console.log(name,id,address,tel);
-
                         //set values
                         $("#cId").val(id);
                         $("#cusName").val(name);
@@ -292,8 +289,35 @@
                     }
                 }
             },
-
             function(error) {
+                console.log(error);
+            }
+        });
+    });
+
+    /*set item detail when combo box click*/
+    $("#itemName").click(function () {
+
+        let itemName = $("#itemName").val();
+
+        $.ajax({
+            url: "item",
+            success: function (resp) {
+                for (let i = 0; i < resp.length; i++) {
+                    if (itemName === resp[i].name) {
+                        let code = resp[i].code;
+                        let price = resp[i].price;
+                        let qty = resp[i].qty;
+
+                        //set values
+                        $("#itemCode").val(code);
+                        $("#itemName").val(itemName);
+                        $("#unitPrice").val(price);
+                        $("#qtyOnHand").val(qty);
+                    }
+                }
+            },
+            error: function (error) {
                 console.log(error);
             }
         });
