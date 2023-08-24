@@ -219,14 +219,6 @@
 
 <script src="assets/jquery-3.7.0.min.js"></script>
 <script src="assets/js/bootstrap.js"></script>
-<!--<script src="model/customerModel.js"></script>
-<script src="controller/customerController.js"></script>
-<script src="controller/validation/customerValidation.js"></script>
-<script src="controller/validation/itemValidation.js"></script>
-<script src="controller/itemController.js"></script>
-<script src="model/itemModel.js"></script>
-<script src="controller/placeOrderController.js"></script>
-<script src="model/placeOrderModel.js"></script>-->
 <script>
 
     loadCustomerNames();
@@ -273,6 +265,39 @@
             }
         });
     }
+
+    /*set customer detail when combo box click*/
+    $("#cusId").click(function () {
+        console.log("clicked")
+        let name = $("#cusId").val();
+        console.log(name);
+
+        $.ajax({
+            url: "customer",
+            success: function (resp) {
+                console.log(resp);
+                for (let i = 0; i < resp.length; i++) {
+                    if (name === resp[i].name) {
+                        let id = resp[i].id;
+                        let address = resp[i].address;
+                        let tel = resp[i].tp;
+
+                        console.log(name,id,address,tel);
+
+                        //set values
+                        $("#cId").val(id);
+                        $("#cusName").val(name);
+                        $("#address").val(address);
+                        $("#cusContact").val(tel);
+                    }
+                }
+            },
+
+            function(error) {
+                console.log(error);
+            }
+        });
+    });
 
 
 </script>
