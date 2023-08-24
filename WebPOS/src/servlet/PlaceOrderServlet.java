@@ -21,7 +21,7 @@ public class PlaceOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        /*get customer details*/
+       /* *//*get customer details*//*
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
@@ -30,7 +30,7 @@ public class PlaceOrderServlet extends HttpServlet {
 
             resp.addHeader("Content-Type", "application/json");
 
-            /*create json array*/
+            *//*create json array*//*
             JsonArrayBuilder allCustomers = Json.createArrayBuilder();
 
             while (resultSet.next()) {
@@ -39,7 +39,7 @@ public class PlaceOrderServlet extends HttpServlet {
                 String address = resultSet.getString(3);
                 int tp = resultSet.getInt(4);
 
-                /*create json object to add json array*/
+                *//*create json object to add json array*//*
                 JsonObjectBuilder customerObj = Json.createObjectBuilder();
                 customerObj.add("id", id);
                 customerObj.add("name", name);
@@ -53,7 +53,7 @@ public class PlaceOrderServlet extends HttpServlet {
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        }
+        }*/
 
        /* *//*get item details*//*
         try {
