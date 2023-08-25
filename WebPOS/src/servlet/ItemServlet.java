@@ -6,9 +6,7 @@
 package servlet;
 
 
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObjectBuilder;
+import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -86,7 +84,7 @@ public class ItemServlet extends HttpServlet {
                 }
                 break;
 
-            case "UPDATE":
+           /* case "UPDATE":
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
@@ -100,12 +98,12 @@ public class ItemServlet extends HttpServlet {
                     if (i > 0) {
                         System.out.println("item updated");
                     }
-                    /*resp.sendRedirect("item");*/
+                    *//*resp.sendRedirect("item");*//*
 
                 } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
                 }
-                break;
+                break;*/
 
             default:
                 resp.sendRedirect("item");
@@ -133,5 +131,37 @@ public class ItemServlet extends HttpServlet {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        JsonReader reader = Json.createReader(req.getReader());
+        JsonObject item = reader.readObject();
+
+        String code = item.getString("code");
+        String name = item.getString("name");
+        String qty = item.getString("qty");
+        String price = item.getString("price");
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+            PreparedStatement pstm = connection.prepareStatement("update  Item set name=?,price=?,qty=? where code=?");
+            pstm.setObject(1, name);
+            pstm.setObject(2, price);
+            pstm.setObject(3, qty);
+            pstm.setObject(4, code);
+
+            int i = pstm.executeUpdate();
+            if (i > 0) {
+                System.out.println("item updated");
+            }
+            /*resp.sendRedirect("item");*/
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

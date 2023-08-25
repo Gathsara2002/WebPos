@@ -191,7 +191,7 @@
         /*get input values from frontend*/
         let formData = $("#customerForm").serialize();
         $.ajax({
-            url: "customer?option=ADD",
+            url: "customer",
             method: "post",
             data: formData,
             success: function (res) {
@@ -275,8 +275,6 @@
     function clearInputFields() {
         $("#customerId,#customerName,#addressCus,#tpNo").val("");
     }
-
-
 </script>
 
 </body>
