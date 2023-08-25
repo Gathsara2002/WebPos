@@ -59,55 +59,23 @@ public class ItemServlet extends HttpServlet {
         String name = req.getParameter("itemName");
         String qty = req.getParameter("qty");
         String price = req.getParameter("price");
-        String option = req.getParameter("option");
 
-        switch (option) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+            PreparedStatement pstm = connection.prepareStatement("insert into Item values (?,?,?,?)");
+            pstm.setObject(1, code);
+            pstm.setObject(2, name);
+            pstm.setObject(3, price);
+            pstm.setObject(4, qty);
 
-            case "ADD":
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
-                    PreparedStatement pstm = connection.prepareStatement("insert into Item values (?,?,?,?)");
-                    pstm.setObject(1, code);
-                    pstm.setObject(2, name);
-                    pstm.setObject(3, price);
-                    pstm.setObject(4, qty);
+            int i = pstm.executeUpdate();
+            if (i > 0) {
+                System.out.println("item saved");
+            }
 
-                    int i = pstm.executeUpdate();
-                    if (i > 0) {
-                        System.out.println("item saved");
-                    }
-                    /*resp.sendRedirect("item");*/
-
-                } catch (ClassNotFoundException | SQLException e) {
-                    e.printStackTrace();
-                }
-                break;
-
-           /* case "UPDATE":
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
-                    PreparedStatement pstm = connection.prepareStatement("update  Item set name=?,price=?,qty=? where code=?");
-                    pstm.setObject(1, name);
-                    pstm.setObject(2, price);
-                    pstm.setObject(3, qty);
-                    pstm.setObject(4, code);
-
-                    int i = pstm.executeUpdate();
-                    if (i > 0) {
-                        System.out.println("item updated");
-                    }
-                    *//*resp.sendRedirect("item");*//*
-
-                } catch (ClassNotFoundException | SQLException e) {
-                    e.printStackTrace();
-                }
-                break;*/
-
-            default:
-                resp.sendRedirect("item");
-                break;
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -157,11 +125,9 @@ public class ItemServlet extends HttpServlet {
             if (i > 0) {
                 System.out.println("item updated");
             }
-            /*resp.sendRedirect("item");*/
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-
     }
 }
