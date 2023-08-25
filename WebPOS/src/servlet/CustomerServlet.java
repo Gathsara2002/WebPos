@@ -6,9 +6,7 @@
 package servlet;
 
 
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObjectBuilder;
+import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -92,7 +90,7 @@ public class CustomerServlet extends HttpServlet {
                 }
                 break;
 
-            case "UPDATE":
+           /* case "UPDATE":
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
@@ -108,12 +106,12 @@ public class CustomerServlet extends HttpServlet {
                         System.out.println("customer updated");
                     }
 
-                    /*resp.sendRedirect("customer");*/
+                    *//*resp.sendRedirect("customer");*//*
 
                 } catch (ClassNotFoundException | SQLException e) {
                     e.printStackTrace();
                 }
-                break;
+                break;*/
 
             default:
                 resp.sendRedirect("customer.html");
@@ -135,6 +133,44 @@ public class CustomerServlet extends HttpServlet {
 
             if (isDeleted) {
                 System.out.println("customer deleted successfully");
+            }
+
+            /*resp.sendRedirect("customer");*/
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        JsonReader reader = Json.createReader(req.getReader());
+        JsonObject customer = reader.readObject();
+
+        String id = customer.getString("id");
+        String name = customer.getString("name");
+        String address = customer.getString("address");
+        String tp = customer.getString("contact");
+
+        System.out.println(id);
+        System.out.println(name);
+        System.out.println(address);
+        System.out.println(tp);
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+            PreparedStatement pstm = connection.prepareStatement("update  Customer set name=?,address=?,telephone=? where id=?");
+            pstm.setObject(1, name);
+            pstm.setObject(2, address);
+            pstm.setObject(3, tp);
+            pstm.setObject(4, id);
+
+            boolean isUpdated = pstm.executeUpdate() > 0;
+
+            if (isUpdated) {
+                System.out.println("customer updated");
             }
 
             /*resp.sendRedirect("customer");*/
