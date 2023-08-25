@@ -222,7 +222,7 @@
             url: "customer",
             method: "put",
             data: JSON.stringify(customer),
-            contentType:"application/json",
+            contentType: "application/json",
             success: function (res) {
                 console.log("customer updated successfully!");
                 loadAllCustomers();
@@ -256,7 +256,6 @@
         $.ajax({
             url: "customer",
             success: function (resp) {
-                console.log(resp);
                 $("#tblCustomer").empty();
                 for (let cus of resp) {
                     let row = `<tr>

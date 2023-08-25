@@ -60,62 +60,26 @@ public class CustomerServlet extends HttpServlet {
         String name = req.getParameter("cusName");
         String address = req.getParameter("cusAddress");
         String tp = req.getParameter("cusTp");
-        String option = req.getParameter("option");
 
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+            PreparedStatement pstm = connection.prepareStatement("insert into Customer values(?,?,?,?)");
+            pstm.setObject(1, id);
+            pstm.setObject(2, name);
+            pstm.setObject(3, address);
+            pstm.setObject(4, tp);
+            boolean isAdded = pstm.executeUpdate() > 0;
 
-        /*use switch because add , delete , update all task execute under post method*/
+            if (isAdded) {
+                System.out.println("customer added successfully");
+            }
 
-        switch (option) {
+            /*no need to redirect request because use of ajax, page is not refresh */
+            /*resp.sendRedirect("customer");*/
 
-            case "ADD":
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
-                    PreparedStatement pstm = connection.prepareStatement("insert into Customer values(?,?,?,?)");
-                    pstm.setObject(1, id);
-                    pstm.setObject(2, name);
-                    pstm.setObject(3, address);
-                    pstm.setObject(4, tp);
-                    boolean isAdded = pstm.executeUpdate() > 0;
-
-                    if (isAdded) {
-                        System.out.println("customer added successfully");
-                    }
-
-                    /*no need to redirect request because use of ajax, page is not refresh */
-                    /*resp.sendRedirect("customer");*/
-
-                } catch (ClassNotFoundException | SQLException e) {
-                    e.printStackTrace();
-                }
-                break;
-
-           /* case "UPDATE":
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
-                    PreparedStatement pstm = connection.prepareStatement("update  Customer set name=?,address=?,telephone=? where id=?");
-                    pstm.setObject(1, name);
-                    pstm.setObject(2, address);
-                    pstm.setObject(3, tp);
-                    pstm.setObject(4, id);
-
-                    boolean isUpdated = pstm.executeUpdate() > 0;
-
-                    if (isUpdated) {
-                        System.out.println("customer updated");
-                    }
-
-                    *//*resp.sendRedirect("customer");*//*
-
-                } catch (ClassNotFoundException | SQLException e) {
-                    e.printStackTrace();
-                }
-                break;*/
-
-            default:
-                resp.sendRedirect("customer.html");
-                break;
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -153,11 +117,6 @@ public class CustomerServlet extends HttpServlet {
         String address = customer.getString("address");
         String tp = customer.getString("contact");
 
-        System.out.println(id);
-        System.out.println(name);
-        System.out.println(address);
-        System.out.println(tp);
-
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
@@ -172,8 +131,6 @@ public class CustomerServlet extends HttpServlet {
             if (isUpdated) {
                 System.out.println("customer updated");
             }
-
-            /*resp.sendRedirect("customer");*/
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
