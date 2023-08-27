@@ -188,8 +188,12 @@
             method: "post",
             data: formData,
             success: function (resp) {
+                alert(resp.message);
                 loadAllItems();
                 clearInputFieldsItems();
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
             }
         });
     });
@@ -202,8 +206,12 @@
             url: "item?code=" + code,
             method: "delete",
             success: function (resp) {
+                alert(resp.message);
                 loadAllItems();
                 clearInputFieldsItems();
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
             }
         });
     });
@@ -229,8 +237,12 @@
             data: JSON.stringify(item),
             contentType: "application/json",
             success: function (resp) {
+                alert(resp.message);
                 loadAllItems();
                 clearInputFieldsItems();
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
             }
         });
     });
