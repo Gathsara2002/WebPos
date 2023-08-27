@@ -195,9 +195,13 @@
             method: "post",
             data: formData,
             success: function (res) {
+                alert(res.message);
                 console.log("customer saved successfully!");
                 loadAllCustomers();
                 clearInputFields();
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
             }
         });
     });
@@ -224,9 +228,13 @@
             data: JSON.stringify(customer),
             contentType: "application/json",
             success: function (res) {
+                alert(res.message);
                 console.log("customer updated successfully!");
                 loadAllCustomers();
                 clearInputFields();
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
             }
         });
     });
@@ -239,9 +247,13 @@
             url: "customer?cusId=" + id,
             method: "delete",
             success: function (res) {
+                alert(res.message);
                 console.log("customer deleted successfully!");
                 loadAllCustomers();
                 clearInputFields();
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
             }
         });
     });

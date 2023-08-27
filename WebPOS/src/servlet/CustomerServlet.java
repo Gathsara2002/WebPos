@@ -73,13 +73,23 @@ public class CustomerServlet extends HttpServlet {
 
             if (isAdded) {
                 System.out.println("customer added successfully");
+                JsonObjectBuilder builder = Json.createObjectBuilder();
+                builder.add("state", "ok");
+                builder.add("message", "Successfully added !");
+                builder.add("data", "");
+                resp.getWriter().print(builder.build());
             }
 
             /*no need to redirect request because use of ajax, page is not refresh */
             /*resp.sendRedirect("customer");*/
 
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            JsonObjectBuilder builder = Json.createObjectBuilder();
+            builder.add("state", "Error");
+            builder.add("message", e.getLocalizedMessage());
+            builder.add("data", "");
+            resp.setStatus(500);
+            resp.getWriter().print(builder.build());
         }
     }
 
@@ -97,12 +107,22 @@ public class CustomerServlet extends HttpServlet {
 
             if (isDeleted) {
                 System.out.println("customer deleted successfully");
+                JsonObjectBuilder builder = Json.createObjectBuilder();
+                builder.add("state", "ok");
+                builder.add("message", "Successfully deleted !");
+                builder.add("data", "");
+                resp.getWriter().print(builder.build());
             }
 
             /*resp.sendRedirect("customer");*/
 
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            JsonObjectBuilder builder = Json.createObjectBuilder();
+            builder.add("state", "Error");
+            builder.add("message", e.getLocalizedMessage());
+            builder.add("data", "");
+            resp.setStatus(500);
+            resp.getWriter().print(builder.build());
         }
     }
 
@@ -130,10 +150,20 @@ public class CustomerServlet extends HttpServlet {
 
             if (isUpdated) {
                 System.out.println("customer updated");
+                JsonObjectBuilder builder = Json.createObjectBuilder();
+                builder.add("state", "ok");
+                builder.add("message", "Successfully updated !");
+                builder.add("data", "");
+                resp.getWriter().print(builder.build());
             }
 
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            JsonObjectBuilder builder = Json.createObjectBuilder();
+            builder.add("state", "Error");
+            builder.add("message", e.getLocalizedMessage());
+            builder.add("data", "");
+            resp.setStatus(500);
+            resp.getWriter().print(builder.build());
         }
     }
 }
