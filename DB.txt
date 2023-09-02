@@ -1,0 +1,41 @@
+DROP DATABASE IF EXISTS webPos;
+CREATE DATABASE IF NOT EXISTS webPos;
+USE webPos;
+
+CREATE TABLE IF NOT EXISTS Customer(
+	id VARCHAR(45) PRIMARY KEY,
+	name VARCHAR(45),
+	address VARCHAR(45),
+	telephone INT
+);
+
+
+CREATE TABLE IF NOT EXISTS Item(
+	code VARCHAR(45) PRIMARY KEY,
+	name VARCHAR(45),
+	price DOUBLE,
+	qty DOUBLE
+);
+
+CREATE TABLE IF NOT EXISTS Orders(
+	order_id VARCHAR(45) PRIMARY KEY,
+	date DATE,
+	item_count INT,
+	total DOUBLE
+);
+
+
+CREATE TABLE IF NOT EXISTS OrderDetails(
+	order_id VARCHAR(45),
+	cus_id VARCHAR(45),
+	code VARCHAR(45),
+	item_name VARCHAR(45),
+	qty INT,
+	price DOUBLE
+);
+
+SHOW TABLES;
+DESC Item;
+DESC Customer;
+SELECT * FROM Customer;
+SELECT * FROM Item;
