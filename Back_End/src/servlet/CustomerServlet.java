@@ -27,6 +27,8 @@ public class CustomerServlet extends HttpServlet {
             ResultSet resultSet = pstm.executeQuery();
             /*add response header*/
             resp.addHeader("Content-Type", "application/json");
+            resp.addHeader("Access-Control-Allow-Origin", "*");
+            resp.addHeader("Content-Type", "application/json");
 
             /*create json array*/
             JsonArrayBuilder allCustomers = Json.createArrayBuilder();

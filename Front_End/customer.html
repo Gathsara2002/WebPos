@@ -269,7 +269,7 @@
     /*function to load all customers*/
     function loadAllCustomers() {
         $.ajax({
-            url: "customer",
+            url: baseUrl+"customer",
             success: function (resp) {
                 $("#tblCustomer").empty();
                 for (let cus of resp) {
