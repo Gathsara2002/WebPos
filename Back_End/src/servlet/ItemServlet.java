@@ -20,13 +20,14 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Content-Type", "application/json");
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
             PreparedStatement pstm = connection.prepareStatement("select * from Item");
             ResultSet resultSet = pstm.executeQuery();
-
-            resp.addHeader("Content-Type", "application/json");
 
             JsonArrayBuilder allItems = Json.createArrayBuilder();
 

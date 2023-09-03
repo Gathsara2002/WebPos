@@ -157,6 +157,8 @@
 <script src="controller/validation/itemValidation.js"></script>
 <script>
 
+    let baseUrl = "http://localhost:8080/pos/";
+
     function bindEventToItem() {
 
         $("#tblItem>tr").click(function () {
@@ -255,7 +257,7 @@
     /*load all item function*/
     function loadAllItems() {
         $.ajax({
-            url: "item",
+            url: baseUrl + "item",
             success: function (resp) {
                 $("#tblItem").empty();
                 for (let item of resp) {
