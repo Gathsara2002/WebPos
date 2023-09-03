@@ -207,6 +207,7 @@
         $.ajax({
             url: baseUrl + "item?code=" + code,
             method: "delete",
+            contentType: "application/json",
             success: function (resp) {
                 alert(resp.message);
                 loadAllItems();
