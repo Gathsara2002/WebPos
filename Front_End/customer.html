@@ -226,7 +226,7 @@
         }
 
         $.ajax({
-            url: "customer",
+            url: baseUrl + "customer",
             method: "put",
             data: JSON.stringify(customer),
             contentType: "application/json",
@@ -247,7 +247,7 @@
 
         let id = $("#customerId").val();
         $.ajax({
-            url: baseUrl+"customer?cusId=" + id,
+            url: baseUrl + "customer?cusId=" + id,
             method: "delete",
             success: function (res) {
                 alert(res.message);
@@ -269,7 +269,7 @@
     /*function to load all customers*/
     function loadAllCustomers() {
         $.ajax({
-            url: baseUrl+"customer",
+            url: baseUrl + "customer",
             success: function (resp) {
                 $("#tblCustomer").empty();
                 for (let cus of resp) {

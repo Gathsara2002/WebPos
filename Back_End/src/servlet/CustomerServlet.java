@@ -143,6 +143,9 @@ public class CustomerServlet extends HttpServlet {
         String address = customer.getString("address");
         String tp = customer.getString("contact");
 
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
