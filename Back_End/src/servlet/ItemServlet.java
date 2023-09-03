@@ -98,6 +98,10 @@ public class ItemServlet extends HttpServlet {
 
         String code = req.getParameter("code");
 
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
+
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
