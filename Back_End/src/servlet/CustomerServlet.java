@@ -60,6 +60,8 @@ public class CustomerServlet extends HttpServlet {
         String name = req.getParameter("cusName");
         String address = req.getParameter("cusAddress");
         String tp = req.getParameter("cusTp");
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Content-Type", "application/json");
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

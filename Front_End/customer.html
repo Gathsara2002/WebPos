@@ -160,6 +160,9 @@
 <script src="assets/js/bootstrap.js"></script>
 <script src="controller/validation/customerValidation.js"></script>
 <script>
+
+    let baseUrl = "http://localhost:8080/pos/";
+
     /*click table row and get values from it*/
     function bindEventToCustomer() {
         /*get customer detail from table*/
@@ -191,7 +194,7 @@
         /*get input values from frontend*/
         let formData = $("#customerForm").serialize();
         $.ajax({
-            url: "customer",
+            url: baseUrl + "customer",
             method: "post",
             data: formData,
             success: function (res) {
