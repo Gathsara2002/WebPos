@@ -94,8 +94,6 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("cusId");
-        resp.addHeader("Access-Control-Allow-Origin", "*");
-        resp.addHeader("Content-Type", "application/json");
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
