@@ -25,10 +25,6 @@ public class CustomerServlet extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
             PreparedStatement pstm = connection.prepareStatement("select * from Customer");
             ResultSet resultSet = pstm.executeQuery();
-            /*add response header*/
-            resp.addHeader("Content-Type", "application/json");
-            resp.addHeader("Access-Control-Allow-Origin", "*");
-            resp.addHeader("Content-Type", "application/json");
 
             /*create json array*/
             JsonArrayBuilder allCustomers = Json.createArrayBuilder();
