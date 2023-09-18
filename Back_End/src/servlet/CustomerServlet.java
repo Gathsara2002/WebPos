@@ -137,9 +137,6 @@ public class CustomerServlet extends HttpServlet {
         String address = customer.getString("address");
         String tp = customer.getString("contact");
 
-        resp.addHeader("Access-Control-Allow-Origin", "*");
-        resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
-
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
@@ -170,11 +167,12 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
-    @Override
+    /*@Override
     protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Access-Control-Allow-Origin", "*");
         resp.addHeader("Access-Control-Allow-Methods", "DELETE");
         resp.addHeader("Access-Control-Allow-Methods", "PUT");
         resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
     }
+*/
 }
