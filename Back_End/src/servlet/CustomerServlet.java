@@ -6,7 +6,10 @@
 package servlet;
 
 
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import javax.json.*;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +23,10 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+        ServletContext servletContext = getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
+
+        try (Connection connection = pool.getConnection()) {
             PreparedStatement pstm = connection.prepareStatement("select * from Customer");
             ResultSet resultSet = pstm.executeQuery();
 
@@ -47,7 +51,7 @@ public class CustomerServlet extends HttpServlet {
 
             resp.getWriter().print(allCustomers.build());
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -59,9 +63,10 @@ public class CustomerServlet extends HttpServlet {
         String address = req.getParameter("cusAddress");
         String tp = req.getParameter("cusTp");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+        ServletContext servletContext = getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
+
+        try (Connection connection = pool.getConnection()) {
             PreparedStatement pstm = connection.prepareStatement("insert into Customer values(?,?,?,?)");
             pstm.setObject(1, id);
             pstm.setObject(2, name);
@@ -81,7 +86,7 @@ public class CustomerServlet extends HttpServlet {
             /*no need to redirect request because use of ajax, page is not refresh */
             /*resp.sendRedirect("customer");*/
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             JsonObjectBuilder builder = Json.createObjectBuilder();
             builder.add("state", "Error");
             builder.add("message", e.getLocalizedMessage());
@@ -95,9 +100,10 @@ public class CustomerServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("cusId");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+        ServletContext servletContext = getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
+
+        try (Connection connection = pool.getConnection()) {
             PreparedStatement pstm = connection.prepareStatement("delete from Customer where id=?");
             pstm.setObject(1, id);
 
@@ -114,7 +120,7 @@ public class CustomerServlet extends HttpServlet {
 
             /*resp.sendRedirect("customer");*/
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             JsonObjectBuilder builder = Json.createObjectBuilder();
             builder.add("state", "Error");
             builder.add("message", e.getLocalizedMessage());
@@ -135,9 +141,10 @@ public class CustomerServlet extends HttpServlet {
         String address = customer.getString("address");
         String tp = customer.getString("contact");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+        ServletContext servletContext = getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
+
+        try (Connection connection = pool.getConnection()) {
             PreparedStatement pstm = connection.prepareStatement("update  Customer set name=?,address=?,telephone=? where id=?");
             pstm.setObject(1, name);
             pstm.setObject(2, address);
@@ -155,7 +162,7 @@ public class CustomerServlet extends HttpServlet {
                 resp.getWriter().print(builder.build());
             }
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             JsonObjectBuilder builder = Json.createObjectBuilder();
             builder.add("state", "Error");
             builder.add("message", e.getLocalizedMessage());

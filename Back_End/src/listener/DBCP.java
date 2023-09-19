@@ -5,11 +5,14 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
 /**
  * @author : Gathsara
  * created : 9/19/2023 -- 8:14 PM
  **/
+
+@WebListener
 public class DBCP implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
