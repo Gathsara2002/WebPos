@@ -6,7 +6,10 @@
 package servlet;
 
 
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import javax.json.*;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +23,10 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+        ServletContext servletContext = getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
+
+        try (Connection connection = pool.getConnection()) {
             PreparedStatement pstm = connection.prepareStatement("select * from Item");
             ResultSet resultSet = pstm.executeQuery();
 
@@ -45,8 +49,7 @@ public class ItemServlet extends HttpServlet {
 
             resp.getWriter().print(allItems.build());
 
-
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -58,9 +61,10 @@ public class ItemServlet extends HttpServlet {
         String qty = req.getParameter("qty");
         String price = req.getParameter("price");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+        ServletContext servletContext = getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
+
+        try (Connection connection = pool.getConnection()) {
             PreparedStatement pstm = connection.prepareStatement("insert into Item values (?,?,?,?)");
             pstm.setObject(1, code);
             pstm.setObject(2, name);
@@ -77,7 +81,7 @@ public class ItemServlet extends HttpServlet {
                 resp.getWriter().print(builder.build());
             }
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             JsonObjectBuilder builder = Json.createObjectBuilder();
             builder.add("state", "Error");
             builder.add("message", e.getLocalizedMessage());
@@ -92,9 +96,10 @@ public class ItemServlet extends HttpServlet {
 
         String code = req.getParameter("code");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+        ServletContext servletContext = getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
+
+        try (Connection connection = pool.getConnection()) {
             PreparedStatement pstm = connection.prepareStatement("delete from Item where code=?");
             pstm.setObject(1, code);
 
@@ -109,7 +114,7 @@ public class ItemServlet extends HttpServlet {
             }
             /*resp.sendRedirect("item");*/
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             JsonObjectBuilder builder = Json.createObjectBuilder();
             builder.add("state", "Error");
             builder.add("message", e.getLocalizedMessage());
@@ -130,9 +135,10 @@ public class ItemServlet extends HttpServlet {
         String qty = item.getString("qty");
         String price = item.getString("price");
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/webPos", "root", "1234");
+        ServletContext servletContext = getServletContext();
+        BasicDataSource pool = (BasicDataSource) servletContext.getAttribute("dbcp");
+
+        try (Connection connection = pool.getConnection()) {
             PreparedStatement pstm = connection.prepareStatement("update  Item set name=?,price=?,qty=? where code=?");
             pstm.setObject(1, name);
             pstm.setObject(2, price);
@@ -149,7 +155,7 @@ public class ItemServlet extends HttpServlet {
                 resp.getWriter().print(builder.build());
             }
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             JsonObjectBuilder builder = Json.createObjectBuilder();
             builder.add("state", "Error");
             builder.add("message", e.getLocalizedMessage());

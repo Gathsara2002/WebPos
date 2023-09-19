@@ -31,12 +31,12 @@ public class MyFilter implements Filter {
             resp.addHeader("Access-Control-Allow-Methods", "PUT, DELETE");
             resp.addHeader("Access-Control-Allow-Headers", "content-type,auth");
             resp.addHeader("Content-Type", "application/json");
-            filterChain.doFilter(servletRequest,servletResponse);
+            filterChain.doFilter(servletRequest, servletResponse);
 
         } else {
             resp.addHeader("Access-Control-Allow-Origin", "*");
             resp.addHeader("Content-Type", "application/json");
-            filterChain.doFilter(servletRequest,servletResponse);
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 
