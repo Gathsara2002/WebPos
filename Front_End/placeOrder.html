@@ -221,13 +221,15 @@
 <script src="assets/js/bootstrap.js"></script>
 <script>
 
+    let baseUrl = "http://localhost:8080/pos/";
+
     loadCustomerNames();
     loadItemNames();
 
     /*set customer name to combo box*/
     function loadCustomerNames() {
         $.ajax({
-            url: "customer",
+            url: baseUrl + "customer",
             success: function (resp) {
                 console.log(resp);
                 //clear combo box
@@ -248,7 +250,7 @@
     /*set item name to combo box*/
     function loadItemNames() {
         $.ajax({
-            url: "item",
+            url: baseUrl + "item",
             success: function (resp) {
                 console.log(resp);
                 //clear combo box
@@ -272,7 +274,7 @@
         let name = $("#cusId").val();
 
         $.ajax({
-            url: "customer",
+            url: baseUrl + "customer",
             success: function (resp) {
                 console.log(resp);
                 for (let i = 0; i < resp.length; i++) {
@@ -301,7 +303,7 @@
         let itemName = $("#itemName").val();
 
         $.ajax({
-            url: "item",
+            url: baseUrl + "item",
             success: function (resp) {
                 for (let i = 0; i < resp.length; i++) {
                     if (itemName === resp[i].name) {
