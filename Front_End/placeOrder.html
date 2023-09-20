@@ -470,6 +470,11 @@
         let price = $("#unitPrice").val();
         let qty = $("#buyQrt").val();
 
+        /*calculate qty after purchasing order*/
+        let qtyNow = $("#qtyOnHand").val();
+        let buyQty = $("#buyQrt").val();
+        let newQty = qtyNow - buyQty;
+
         let detail = {
             orderId: oid,
             cusId: cid,
@@ -477,6 +482,7 @@
             itemName: name,
             itemPrice: price,
             qty: qty,
+            newQty:newQty
         }
         orderDetail.push(detail);
         return orderDetail;
@@ -487,6 +493,7 @@
         let orderId = $("#orderId").val();
         let date = $("#date").val();
         let totBill = $("#total").val();
+
         let array = saveOrderDetailsArray();
 
         let order = {
@@ -494,7 +501,7 @@
             "date": date,
             "total": totBill,
             "count": count,
-            "orderArray": array.pop()
+            "orderArray": array
         }
 
         $.ajax({
@@ -508,18 +515,56 @@
             },
             error: function (error) {
                 console.log("error - po");
+                console.log(error);
             }
         });
     }
 
-    /*purchase function*/
+    /*update items after purchased*/
+    // function updateItems() {
+    //     let code = $("#itemCode").val();
+    //     let name = $("#itemName").val();
+    //     let price = $("#unitPrice").val();
+    //     let qty = $("#qtyOnHand").val();
+    //
+    //     let buyQty = $("#buyQrt").val();
+    //     let newQty = qty - buyQty;
+    //
+    //     let item = {
+    //         code: code,
+    //         name: name,
+    //         price: price,
+    //         qty: newQty
+    //     }
+    //
+    //     $.ajax({
+    //         url: baseUrl + "placeOrder",
+    //         method: "put",
+    //         data: JSON.stringify(item),
+    //         contentType: "application/json",
+    //         success: function (resp) {
+    //             alert(resp.message);
+    //             console.log("done")
+    //         },
+    //         error: function (error) {
+    //             alert(JSON.parse(error.responseText).message);
+    //             console.log("error");
+    //         }
+    //     });
+    // }
+
+    function clearFields() {
+        $("#itemName,#unitPrice,#buyQrt,#qtyOnHand,#total,#subTotal,#cash,#balance,#date,#orderId,#cId,#cusName,#address,#cusContact").val("");
+        $("#discount").val('0');
+    }
+
+    /*purchase order*/
     $("#btnPurchase").click(function () {
         savePlaceOrder();
-        //updateItems();
         $("#orderTable").empty();
         //if placeOrder array not empty.every time previous order details automatically adds to order table
         placeOrderArray = [];
-        //orderDetail = [];
+        orderDetail = [];
         count = 0;
         alert("Order complete !");
         clearFields();
