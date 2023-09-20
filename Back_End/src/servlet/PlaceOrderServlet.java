@@ -58,29 +58,6 @@ public class PlaceOrderServlet extends HttpServlet {
 
             JsonArray orderArray = jsonObject.getJsonArray("orderArray");
 
-           /* for (JsonValue value : orderArray) {
-                String cusId = value.asJsonObject().getString("cusId");
-                String orderId = value.asJsonObject().getString("orderId");
-                String code = value.asJsonObject().getString("code");
-                String itemName = value.asJsonObject().getString("itemName");
-                String qty = value.asJsonObject().getString("qty");
-                String itemPrice = value.asJsonObject().getString("itemPrice");
-
-                pstm2.setObject(1, orderId);
-                pstm2.setObject(2, cusId);
-                pstm2.setObject(3, code);
-                pstm2.setObject(4, itemName);
-                pstm2.setObject(5, qty);
-                pstm2.setObject(6, itemPrice);
-                boolean isOrderDetailsSaved = pstm2.executeUpdate() > 0;
-
-                if (!isOrderDetailsSaved) {
-                    connection.rollback();
-                    connection.setAutoCommit(true);
-                    System.out.println("order details are not saved");
-                }
-            }*/
-
             for (int i = 0; i < orderArray.size() - 1; i++) {
                 String cusId = orderArray.get(i).asJsonObject().getString("cusId");
                 String orderId = orderArray.get(i).asJsonObject().getString("orderId");
@@ -106,6 +83,34 @@ public class PlaceOrderServlet extends HttpServlet {
 
             /*update item qty*/
             PreparedStatement pstm3 = connection.prepareStatement("update  Item set name=?,price=?,qty=? where code=?");
+
+            JsonArray itemArray = jsonObject.getJsonArray("orderArray");
+
+            for (int i = 0; i < itemArray.size() - 1; i++) {
+                String itemName = orderArray.get(i).asJsonObject().getString("itemName");
+                String itemPrice = orderArray.get(i).asJsonObject().getString("itemPrice");
+                String qty = orderArray.get(i).asJsonObject().getString("qty");
+                String boughtQty = orderArray.get(i).asJsonObject().getString("boughtQty");
+                String code = orderArray.get(i).asJsonObject().getString("code");
+
+                /*calculate item qty*/
+                int qty1 = Integer.parseInt(qty);
+                int qty2 = Integer.parseInt(boughtQty);
+                int newQty = qty2 - qty1;
+
+                pstm3.setObject(1, itemName);
+                pstm3.setObject(2, itemPrice);
+                pstm3.setObject(3, newQty);
+                pstm3.setObject(4, code);
+
+                boolean isItemQtyUpdated = pstm3.executeUpdate() > 0;
+
+                if (!isItemQtyUpdated) {
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    System.out.println("item qty is not updated");
+                }
+            }
 
             connection.commit();
             connection.setAutoCommit(true);

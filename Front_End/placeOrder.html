@@ -469,11 +469,7 @@
         let name = $("#itemName").val();
         let price = $("#unitPrice").val();
         let qty = $("#buyQrt").val();
-
-        /*calculate qty after purchasing order*/
         let qtyNow = $("#qtyOnHand").val();
-        let buyQty = $("#buyQrt").val();
-        let newQty = qtyNow - buyQty;
 
         let detail = {
             orderId: oid,
@@ -482,7 +478,7 @@
             itemName: name,
             itemPrice: price,
             qty: qty,
-            newQty:newQty
+            boughtQty: qtyNow,
         }
         orderDetail.push(detail);
         return orderDetail;
