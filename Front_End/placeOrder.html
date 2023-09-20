@@ -226,6 +226,22 @@
     /*use array to store order details temporarily*/
     let placeOrderArray = [];
 
+    let placeOrder = {
+        itemCode: "",
+        itemName: "",
+        itemPrice: "",
+        qty: "",
+        total: 0
+    }
+
+
+    let buyQty = 0;
+    let total = 0;
+    let unitPrice = 0;
+
+    /*item count*/
+    let count = 0;
+
     loadCustomerNames();
     loadItemNames();
 
@@ -346,7 +362,7 @@
         newOrder.qty = qty;
         newOrder.total = total;
 
-        placeOrderDB.push(newOrder);
+        placeOrderArray.push(newOrder);
         getAllOrders();
     }
 
@@ -355,12 +371,12 @@
 
         $("#orderTable").empty();
 
-        for (let i = 0; i < placeOrderDB.length; i++) {
-            let code = placeOrderDB[i].itemCode;
-            let name = placeOrderDB[i].itemName;
-            let price = placeOrderDB[i].itemPrice;
-            let qty = placeOrderDB[i].qty;
-            let total = placeOrderDB[i].total;
+        for (let i = 0; i < placeOrderArray.length; i++) {
+            let code = placeOrderArray[i].itemCode;
+            let name = placeOrderArray[i].itemName;
+            let price = placeOrderArray[i].itemPrice;
+            let qty = placeOrderArray[i].qty;
+            let total = placeOrderArray[i].total;
 
             let trow = `<tr>
             <td>${code}</td>
@@ -376,6 +392,23 @@
 
     }
 
+    /*set order detail to table*/
+    $("#btnCart").click(function () {
+        saveOrderDetails();
+        findTotal();
+        $("#total").val(payTot);
+        count++;
+    });
+
+    /*to find and display total in payments details*/
+    let payTot = 0;
+
+    function findTotal() {
+        payTot = 0;
+        for (let i = 0; i < placeOrderDB.length; i++) {
+            payTot += placeOrderDB[i].total;
+        }
+    }
 
 
 </script>
