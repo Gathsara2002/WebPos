@@ -234,13 +234,20 @@
         total: 0
     }
 
-
+    /*bought qty*/
     let buyQty = 0;
+
+    /*total*/
     let total = 0;
+
+    /*item unit price*/
     let unitPrice = 0;
 
     /*item count*/
     let count = 0;
+
+    /*to find and display total in payments details*/
+    let payTot = 0;
 
     loadCustomerNames();
     loadItemNames();
@@ -378,7 +385,7 @@
             let qty = placeOrderArray[i].qty;
             let total = placeOrderArray[i].total;
 
-            let trow = `<tr>
+            let tRow = `<tr>
             <td>${code}</td>
             <td>${name}</td>
             <td>${price}</td>
@@ -386,7 +393,7 @@
             <td>${total}</td>
         </tr>`;
 
-            $("#orderTable").append(trow);
+            $("#orderTable").append(tRow);
 
         }
 
@@ -400,16 +407,55 @@
         count++;
     });
 
-    /*to find and display total in payments details*/
-    let payTot = 0;
-
     function findTotal() {
         payTot = 0;
-        for (let i = 0; i < placeOrderDB.length; i++) {
-            payTot += placeOrderDB[i].total;
+        for (let i = 0; i < placeOrderArray.length; i++) {
+            payTot += placeOrderArray[i].total;
         }
     }
 
+    /*find sub total after discount*/
+    function findSubTotal() {
+
+        let discount = $("#discount").val();
+
+        if (discount === '0') {
+            let val = $("#total").val();
+            $("#subTotal").val(val);
+        } else {
+            let dis = parseInt(discount);
+            let value = payTot * dis / 100;
+            let subTot = payTot - value;
+            $("#subTotal").val(subTot);
+        }
+    }
+
+    /*find balance method*/
+    function findBalance() {
+        let cash = $("#cash").val();
+        let subTot = $("#subTotal").val();
+
+        let val1 = parseInt(cash);
+        let val2 = parseInt(subTot);
+
+        let balance = val1 - val2;
+
+        $("#balance").val(balance);
+    }
+
+    /*display sub total after press space*/
+    $("#discount").keypress(function (e) {
+        if (e.keyCode === 32) {
+            findSubTotal();
+        }
+    });
+
+    /*display balance*/
+    $("#cash").keypress(function (e) {
+        if (e.keyCode === 32) {
+            findBalance();
+        }
+    });
 
 </script>
 
