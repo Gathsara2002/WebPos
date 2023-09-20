@@ -223,6 +223,9 @@
 
     let baseUrl = "http://localhost:8080/pos/";
 
+    /*use array to store order details temporarily*/
+    let placeOrderArray = [];
+
     loadCustomerNames();
     loadItemNames();
 
@@ -324,6 +327,29 @@
             }
         });
     });
+
+    /*add details to order table*/
+    function saveOrderDetails() {
+        let code = $("#itemCode").val();
+        let name = $("#itemName").val();
+        let price = $("#unitPrice").val();
+        let qty = $("#buyQrt").val();
+
+        buyQty = parseInt(qty);
+        unitPrice = parseFloat(price);
+        total = buyQty * unitPrice;
+
+        let newOrder = Object.assign({}, placeOrder);
+        newOrder.itemCode = code;
+        newOrder.itemName = name;
+        newOrder.itemPrice = price;
+        newOrder.qty = qty;
+        newOrder.total = total;
+
+        placeOrderDB.push(newOrder);
+        getAllOrders();
+    }
+
 
 
 </script>
