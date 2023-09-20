@@ -350,6 +350,32 @@
         getAllOrders();
     }
 
+    /*load all order details for one order*/
+    function getAllOrders() {
+
+        $("#orderTable").empty();
+
+        for (let i = 0; i < placeOrderDB.length; i++) {
+            let code = placeOrderDB[i].itemCode;
+            let name = placeOrderDB[i].itemName;
+            let price = placeOrderDB[i].itemPrice;
+            let qty = placeOrderDB[i].qty;
+            let total = placeOrderDB[i].total;
+
+            let trow = `<tr>
+            <td>${code}</td>
+            <td>${name}</td>
+            <td>${price}</td>
+            <td>${qty}</td>
+            <td>${total}</td>
+        </tr>`;
+
+            $("#orderTable").append(trow);
+
+        }
+
+    }
+
 
 
 </script>
