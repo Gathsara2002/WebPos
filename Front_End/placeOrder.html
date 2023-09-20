@@ -405,6 +405,7 @@
     /*set order detail to table*/
     $("#btnCart").click(function () {
         saveOrderDetails();
+        saveOrderDetailsArray();
         findTotal();
         $("#total").val(payTot);
         count++;
@@ -459,6 +460,71 @@
             findBalance();
         }
     });
+
+    /*set order details to orderDetails array*/
+    function saveOrderDetailsArray() {
+        let cid = $("#cId").val();
+        let oid = $("#orderId").val();
+        let code = $("#itemCode").val();
+        let name = $("#itemName").val();
+        let price = $("#unitPrice").val();
+        let qty = $("#buyQrt").val();
+
+        let detail = {
+            orderId: oid,
+            cusId: cid,
+            code: code,
+            itemName: name,
+            itemPrice: price,
+            qty: qty,
+        }
+        orderDetail.push(detail);
+        return orderDetail;
+    }
+
+    /*place order function*/
+    function savePlaceOrder() {
+        let orderId = $("#orderId").val();
+        let date = $("#date").val();
+        let totBill = $("#total").val();
+        let array = saveOrderDetailsArray();
+
+        let order = {
+            "oid": orderId,
+            "date": date,
+            "total": totBill,
+            "count": count,
+            "orderArray": array.pop()
+        }
+
+        $.ajax({
+            url: baseUrl + "placeOrder",
+            method: "post",
+            dataType: "json",
+            data: JSON.stringify(order),
+            contentType: "application/json",
+            success: function (resp) {
+                console.log("done - po");
+            },
+            error: function (error) {
+                console.log("error - po");
+            }
+        });
+    }
+
+    /*purchase function*/
+    $("#btnPurchase").click(function () {
+        savePlaceOrder();
+        //updateItems();
+        $("#orderTable").empty();
+        //if placeOrder array not empty.every time previous order details automatically adds to order table
+        placeOrderArray = [];
+        //orderDetail = [];
+        count = 0;
+        alert("Order complete !");
+        clearFields();
+    });
+
 
 </script>
 
